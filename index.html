@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Tempest</title>
     <meta charset="UTF-8">
@@ -8,6 +7,8 @@
     <link rel="icon" href="image/sl.png" type="image/sl.png">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="main.js"></script>
+    <!-- 手机端适配 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
@@ -37,6 +38,11 @@
                     <div class="countdown-progress-bar" id="day-progress"></div>
                 </div>
                 <div id="day-time"></div>
+            </div>
+            <div id="date-time"></div> <!-- 新增显示日期的元素 -->
+            <div class="date-info">
+                <div id="day-of-week"></div> <!-- 新增显示星期几的元素 -->
+                <div id="week-number"></div> <!-- 新增显示周数的元素 -->
             </div>
         </div>
     </div>
