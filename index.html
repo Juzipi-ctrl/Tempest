@@ -13,6 +13,7 @@
 </head>
 
 <body>
+
     <div class="countdown-card">
         <div class="card-header">
             <i class="hourglass-icon"></i>
@@ -23,6 +24,7 @@
                 <div class="countdown-label">今年剩余时间</div>
                 <div class="countdown-progress">
                     <div class="countdown-progress-bar" id="year-progress"></div>
+                    <div id="year-percentage" class="countdown-percentage"></div> <!-- 移到进度条里面 -->
                 </div>
                 <div id="year-time"></div>
             </div>
@@ -30,6 +32,7 @@
                 <div class="countdown-label">本月剩余时间</div>
                 <div class="countdown-progress">
                     <div class="countdown-progress-bar" id="month-progress"></div>
+                    <div id="month-percentage" class="countdown-percentage"></div> <!-- 移到进度条里面 -->
                 </div>
                 <div id="month-time"></div>
             </div>
@@ -37,22 +40,27 @@
                 <div class="countdown-label">今天剩余时间</div>
                 <div class="countdown-progress">
                     <div class="countdown-progress-bar" id="day-progress"></div>
+                    <div id="day-percentage" class="countdown-percentage"></div> <!-- 移到进度条里面 -->
                 </div>
                 <div id="day-time"></div>
             </div>
-            <div id="date-time"></div> <!-- 新增显示日期的元素 -->
+            <div id="date-time"></div>
             <div class="countdown-progress">
                 <div class="countdown-progress-bar" id="date-progress-bar"></div>
+                <div id="date-percentage" class="countdown-percentage"></div> <!-- 移到进度条里面 -->
             </div>
             <div class="date-info">
-                <div id="day-of-week"></div> <!-- 新增显示星期几的元素 -->
-                <div id="week-number"></div> <!-- 新增显示周数的元素 -->
+                <div id="day-of-week"></div>
+                <div id="week-number"></div>
             </div>
-            <div id="current-time"></div> <!-- 新增显示当前时间的元素 -->
+            <div id="current-time"></div>
             <div id="holiday-notification" class="holiday-notification" style="display: none;"></div>
-            <div id="daily-message" class="daily-message" style="display: none;"></div> <!-- 新增每日寄语元素 -->
+            <div id="daily-message" class="daily-message" style="display: none;"></div>
         </div>
     </div>
+
+
+
 </body>
 
 </html>

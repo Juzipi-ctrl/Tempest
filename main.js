@@ -25,6 +25,7 @@ function updateCountdown() {
 
     $('#year-progress').css('width', `${yearProgress}%`);
     $('#year-time').text(`${Math.floor(yearRemaining / (1000 * 60 * 60 * 24))}天`);
+    $('#year-percentage').text(`${yearProgress.toFixed(2)}%`); // 移到进度条外面
 
     // 本月剩余时间
     const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
@@ -34,10 +35,11 @@ function updateCountdown() {
 
     $('#month-progress').css('width', `${monthProgress}%`);
     $('#month-time').text(`${Math.floor(monthRemaining / (1000 * 60 * 60 * 24))}天`);
+    $('#month-percentage').text(`${monthProgress.toFixed(2)}%`); // 移到进度条外面
 
     // 今天剩余时间
     const dayEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
-    const dayTotal = 24 * 60 * 60 * 1000; // 一天的总毫秒数
+    const dayTotal = 24 * 60 * 60 * 1000;
     const dayRemaining = dayEnd - now;
     const dayProgress = ((dayTotal - dayRemaining) / dayTotal) * 100;
 
@@ -47,6 +49,7 @@ function updateCountdown() {
     const secondsRemaining = Math.floor((dayRemaining % (1000 * 60)) / 1000);
 
     $('#day-time').text(`${hoursRemaining}小时${minutesRemaining}分钟${secondsRemaining}秒`);
+    $('#day-percentage').text(`${dayProgress.toFixed(2)}%`); // 移到进度条外面
 
     // 显示当前日期
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -65,6 +68,7 @@ function updateCountdown() {
 
     // 更新日期进度条
     $('#date-progress-bar').css('width', `${yearProgress}%`);
+    $('#date-percentage').text(`${yearProgress.toFixed(2)}%`); // 移到进度条外面
 
     // 显示当前时间
     const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
@@ -74,11 +78,10 @@ function updateCountdown() {
 
 function updateHolidayNotification(now) {
     const year = now.getFullYear();
-    const month = now.getMonth() + 1; // 月份从0开始，需要加1
+    const month = now.getMonth() + 1;
     const day = now.getDate();
     const today = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 
-    // 请求API获取节假日列表
     $.getJSON(`https://api.jiejiariapi.com/v1/holidays/${year}`, function (holidays) {
         const holiday = holidays[today];
 
@@ -89,7 +92,7 @@ function updateHolidayNotification(now) {
         }
     }).fail(function (jqXHR, textStatus, errorThrown) {
         console.log(`无法获取节假日数据: ${textStatus}, ${errorThrown}`);
-        $('#holiday-notification').text(`今天不是节假日`).show(); // 如果API请求失败，显示今天不是节假日
+        $('#holiday-notification').text(`今天不是节假日`).show();
     });
 
     // 请求API获取每日寄语
