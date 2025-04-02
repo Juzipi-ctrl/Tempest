@@ -114,7 +114,7 @@ body {
     height: 15px;
     overflow: hidden;
     position: relative;
-    width: 90%;
+    width: 100%;
     margin: 10px;
     box-sizing: border-box;
 }
@@ -210,7 +210,7 @@ body {
 
 /* 视口元标签 */
 /* 全屏视口的CSS规则 */
-@media only screen and (min-width: 801px) {
+@media only screen and (min-width: 800px) {
 
     #holiday-notification,
     #daily-message {
@@ -334,6 +334,8 @@ body {
         /* 调整进度条的圆角 */
         height: 100%;
         /* 确保进度条的宽度随进度变化 */
+        width: calc(100% - 40px);
+        /* 减去百分比文本的宽度 */
     }
 
     .card-header {
@@ -380,5 +382,41 @@ body {
         color: #333;
         margin-top: 20px;
         text-align: center;
+    }
+
+    /* 调整百分比显示位置 */
+    .countdown-percentage {
+        font-size: 16px;
+        /* 默认字体大小 */
+        color: #333;
+        position: absolute;
+        right: 5px;
+        top: 2px;
+        width: auto;
+        text-align: right;
+        z-index: 1;
+    }
+
+    /* 针对大屏幕的调整，确保进度条有足够的内边距以显示百分比 */
+    @media only screen and (min-width: 800px) {
+        .countdown-percentage {
+            position: absolute;
+            right: 5px;
+            /* 如果希望百分比仍然在右侧 */
+            top: 2px;
+            font-size: 16px;
+            /* 适当调整字体大小以适应大屏幕 */
+        }
+
+        /* 针对小屏幕的调整 */
+        @media only screen and (max-width: 800px) {
+            .countdown-percentage {
+                top: 2px;
+                right: 5px;
+                font-size: 15px;
+                /* 适当调整字体大小以适应小屏幕 */
+            }
+        }
+
     }
 }
