@@ -1,218 +1,384 @@
-  /* 居中显示卡片 */
-  body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #f0f0f0;
-      font-family: '楷体';
-      /* 修改字体 */
-      font-size: 22px;
-      /* 修改字体大小 */
-      letter-spacing: 2px;
-      /* 增加间距 */
-  }
+/* 居中显示卡片 */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: '楷体';
+    /* 修改字体 */
+    font-size: 19px;
+    /* 修改字体大小 */
+}
 
-  .countdown-card {
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      overflow: hidden;
-      width: 100%;
-      max-width: 500px;
-      height: auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      align-items: center;
-      padding: 20px;
-      box-sizing: border-box;
-      border: 1px solid #ddd;
-      /* 使用更浅的颜色作为边框颜色 */
-      animation: fadeIn 2s ease-in-out;
-  }
+.holiday-notification {
+    background-color: #b6e2a8;
+    border-radius: 10px;
+    padding: 20px 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    /* 增加这一行来调整间距 */
+    font-size: 19px;
+    color: #333;
+    text-align: center;
+    width: 10%;
+    box-sizing: border-box;
+    animation: fadeIn 2s ease-in-out;
+}
 
-  .card-header {
-      background-color: #f8f9fa;
-      padding: 20px;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      align-items: center;
-      font-size: 24px;
-      font-weight: bold;
-      color: #333;
-      width: 100%;
-      box-sizing: border-box;
-      letter-spacing: 2px;
-      /* 增加间距 */
-  }
+.daily-message {
+    background-color: #f9e2bc;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    font-size: 19px;
+    color: #333;
+    text-align: center;
+    width: 10%;
+    box-sizing: border-box;
+    animation: fadeIn 2s ease-in-out;
+}
 
-  .card-header .hourglass-icon:before {
-      content: '\23F3';
-      font-size: 39px;
-      margin-right: 20px;
-      font-family: '微软雅黑';
-  }
+.countdown-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    animation: fadeIn 2s ease-in-out;
+}
 
-  .card-body {
-      padding: 20px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      align-items: center;
-      height: 100%;
-      box-sizing: border-box;
-  }
+.card-header {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    width: 100%;
+    box-sizing: border-box;
+}
 
-  .countdown-item {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      box-sizing: border-box;
-      margin-bottom: 30px;
-      /* 增加间距 */
-  }
+.card-header .hourglass-icon:before {
+    content: '\23F3';
+    font-size: 36px;
+    margin-right: 19px;
+    font-family: '黑体';
+}
 
-  .countdown-label {
-      font-size: 22px;
-      color: #333;
-      width: 100%;
-      text-align: center;
-      margin-bottom: 10px;
-      letter-spacing: 2px;
-      /* 增加间距 */
-  }
+.card-body {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    box-sizing: border-box;
+}
 
-  .countdown-progress {
-      background-color: #f5f5f5;
-      border-radius: 5px;
-      height: 15px;
-      overflow: hidden;
-      position: relative;
-      width: 90%;
-      margin: 10px;
-      box-sizing: border-box;
-  }
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    /* 增加间距 */
+}
 
-  .countdown-progress-bar {
-      height: 100%;
-      border-radius: 5px;
-      width: 0;
-      background-color: #007bff;
-      background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-      background-size: 20px 20px;
-      animation: progress-scroll 1s linear infinite;
-      transition: width 0.5s ease;
-  }
+.countdown-label {
+    font-size: 20px;
+    color: #333;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+    /* 增加间距 */
+}
 
-  #year-progress {
-      background-color: #ff7e5f;
-  }
+.countdown-progress {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    height: 15px;
+    overflow: hidden;
+    position: relative;
+    width: 90%;
+    margin: 10px;
+    box-sizing: border-box;
+}
 
-  #month-progress {
-      background-color: #6a11cb;
-  }
+.countdown-progress-bar {
+    height: 100%;
+    border-radius: 10px;
+    width: 0;
+    background-color: #007bff;
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-size: 20px 20px;
+    animation: progress-scroll 1s linear infinite;
+    transition: width 0.5s ease;
+}
 
-  #day-progress {
-      background-color: #00b096;
-  }
+#year-progress {
+    background-color: #ff7e5f;
+}
 
-  #date-time {
-      font-size: 20px;
-      color: #333;
-      margin-top: 10px;
-      text-align: center;
-  }
+#month-progress {
+    background-color: #6a11cb;
+}
 
-  #day-of-week,
-  #week-number {
-      font-size: 20px;
-      color: #3052ce;
-      margin: 0 10px;
-  }
+#day-progress {
+    background-color: #00b096;
+}
 
-  .date-info {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 20px;
-  }
+#date-time {
+    font-size: 20px;
+    color: #333;
+    margin-top: 10px;
+    text-align: center;
+}
 
-  /* 动画效果 */
-  @keyframes progress-scroll {
-      from {
-          background-position: 0 0;
-      }
+#day-of-week,
+#week-number {
+    font-size: 20px;
+    color: #3052ce;
+    margin: 0 10px;
+}
 
-      to {
-          background-position: -20px 0;
-      }
-  }
+.date-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    flex-direction: row;
+    /* 确保在所有视口中水平排列 */
+}
 
-  @keyframes fadeIn {
-      from {
-          opacity: 0;
-      }
+.date-progress {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    height: 15px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
 
-      to {
-          opacity: 1;
-      }
-  }
+.date-progress-bar {
+    height: 100%;
+    border-radius: 10px;
+    width: 0;
+    background-color: #00b096;
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-size: 20px 20px;
+    animation: progress-scroll 1s linear infinite;
+    transition: width 0.5s ease;
+}
 
-  /* 视口元标签 */
-  @media only screen and (max-width: 600px) {
-      body {
-          font-size: 14px;
-          padding: 10px;
-      }
+/* 动画效果 */
+@keyframes progress-scroll {
+    from {
+        background-position: 0 0;
+    }
 
-      .countdown-card {
-          width: 100%;
-          height: auto;
-          padding: 10px;
-          box-sizing: border-box;
-      }
+    to {
+        background-position: -20px 0;
+    }
+}
 
-      .countdown-item {
-          margin-bottom: 15px;
-          /* 调整间距 */
-      }
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
 
-      .countdown-label {
-          margin-bottom: 8px;
-          /* 调整间距 */
-      }
+    to {
+        opacity: 1;
+    }
+}
 
-      .countdown-progress {
-          margin: 5px;
-          width: 100%;
-      }
+/* 视口元标签 */
+/* 全屏视口的CSS规则 */
+@media only screen and (min-width: 801px) {
 
-      .countdown-progress-bar {
-          border-radius: 3px;
-      }
+    #holiday-notification,
+    #daily-message {
+        display: inline-block;
+        width: auto;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        text-align: center;
+        /* 使文本居中 */
+    }
 
-      .card-header {
-          font-size: 20px;
-          padding: 15px;
-      }
+    .holiday-notification,
+    .daily-message {
+        width: 100%;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        /* 确保内边距和边框计入宽度 */
+    }
 
-      .card-header .hourglass-icon:before {
-          font-size: 30px;
-          margin-right: 15px;
-      }
+    .holiday-notification+.daily-message {
+        margin-top: 0;
+        /* 确保两个块级元素之间没有额外的间距 */
+    }
 
-      #date-time,
-      #day-of-week,
-      #week-number {
-          font-size: 16px;
-      }
+    .date-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        flex-direction: row;
+        /* 确保在全屏时水平排列 */
+        width: 100%;
+    }
 
-      .date-info {
-          margin-top: 8px;
-      }
-  }
+    #day-of-week,
+    #week-number {
+        font-size: 20px;
+        color: #3052ce;
+        margin: 0 10px;
+    }
+
+    /* 增加当前时间的顶部间距 */
+    #current-time {
+        margin-top: 20px;
+    }
+
+    /* 确保节假日通知背景在全屏视口中铺满 */
+    .holiday-notification {
+        width: auto;
+    }
+}
+
+/* 视口元标签 */
+@media only screen and (max-width: 800px) {
+    body {
+        font-size: 17px;
+        padding: 10px;
+        /* 增加内边距 */
+    }
+
+    #holiday-notification,
+    #daily-message {
+        display: block;
+        /* 在小屏幕上垂直排列 */
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        /* 确保内边距和边框计入宽度 */
+    }
+
+    .holiday-notification {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        /* 确保内边距和边框计入宽度 */
+    }
+
+    .daily-message {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        /* 确保内边距和边框计入宽度 */
+    }
+
+    .countdown-card {
+        width: 100%;
+        height: auto;
+        /* 移除固定高度 */
+        padding: 10px;
+        box-sizing: border-box;
+        /* 确保内边距和边框计入宽度 */
+    }
+
+    .countdown-item {
+        margin-bottom: 25px;
+        /* 调整间距 */
+        flex-direction: column;
+        /* 确保项目在小屏幕上垂直排列 */
+        align-items: center;
+        /* 保持子元素居中对齐 */
+    }
+
+    .countdown-label {
+        margin-bottom: 8px;
+        /* 调整间距 */
+    }
+
+    .countdown-progress {
+        margin: 5px;
+        width: 100%;
+        height: 18px;
+        /* 调整进度条高度以适应小屏幕 */
+    }
+
+    .countdown-progress-bar {
+        border-radius: 6px;
+        /* 调整进度条的圆角 */
+        height: 100%;
+        /* 确保进度条的宽度随进度变化 */
+    }
+
+    .card-header {
+        font-size: 20px;
+        padding: 15px;
+        width: 100%;
+        box-sizing: border-box;
+        /* 确保内边距和边框计入宽度 */
+    }
+
+    .card-header .hourglass-icon:before {
+        font-size: 30px;
+        margin-right: 15px;
+    }
+
+    #date-time,
+    #day-of-week,
+    #week-number {
+        font-size: 17px;
+    }
+
+    .date-info {
+        margin-top: 8px;
+        align-items: center;
+        flex-direction: row;
+        /* 在小屏幕上水平排列 */
+        width: 100%;
+    }
+
+    .date-progress {
+        margin-top: 10px;
+        width: 100%;
+        height: 15px;
+        /* 调整进度条高度以适应小屏幕 */
+    }
+
+    .date-progress-bar {
+        border-radius: 6px;
+        height: 100%;
+    }
+
+    #current-time {
+        font-size: 20px;
+        color: #333;
+        margin-top: 20px;
+        text-align: center;
+    }
+}
