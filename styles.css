@@ -413,8 +413,32 @@ body {
         color: #000000;
         position: absolute;
         right: 5px;
-        top: 0px;
-        text-shadow: 1px 1px 2px rgba(70, 70, 70, 0.3);
-            /* 阴影效果 */
+        top: 2px;
+        width: auto;
+        text-align: right;
+        z-index: 1;
+    }
+
+    /* 针对大屏幕的调整，确保进度条有足够的内边距以显示百分比 */
+    @media only screen and (min-width: 800px) {
+        .countdown-percentage {
+            position: absolute;
+            right: 5px;
+            /* 如果希望百分比仍然在右侧 */
+            top: 2px;
+            font-size: 16px;
+            /* 适当调整字体大小以适应大屏幕 */
+        }
+
+        /* 针对小屏幕的调整 */
+        @media only screen and (max-width: 800px) {
+            .countdown-percentage {
+                top: 2px;
+                right: 5px;
+                font-size: 15px;
+                /* 适当调整字体大小以适应小屏幕 */
+            }
+        }
+
     }
 }
