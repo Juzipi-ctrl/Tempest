@@ -6,10 +6,8 @@ body {
     height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
-    font-family: '楷体';
-    /* 修改字体 */
-    font-size: 19px;
-    /* 修改字体大小 */
+    font-family: 'arial';
+    font-size: 20px;
 }
 
 .holiday-notification {
@@ -18,8 +16,7 @@ body {
     padding: 20px 20px;
     margin-bottom: 20px;
     margin-top: 20px;
-    /* 增加这一行来调整间距 */
-    font-size: 19px;
+    font-size: 20px;
     color: #333;
     text-align: center;
     width: 10%;
@@ -46,7 +43,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     width: 90%;
-    max-width: 500px;
+    max-width: 600px;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -74,7 +71,7 @@ body {
     content: '\23F3';
     font-size: 36px;
     margin-right: 19px;
-    font-family: '黑体';
+    font-family: 'arial';
 }
 
 .card-body {
@@ -95,8 +92,7 @@ body {
     align-items: center;
     width: 100%;
     box-sizing: border-box;
-    margin-bottom: 20px;
-    /* 增加间距 */
+    margin-bottom: 10px;
 }
 
 .countdown-label {
@@ -105,7 +101,6 @@ body {
     width: 100%;
     text-align: center;
     margin-bottom: 10px;
-    /* 增加间距 */
 }
 
 .countdown-progress {
@@ -121,7 +116,7 @@ body {
 
 .countdown-progress-bar {
     height: 100%;
-    border-radius: 10px;
+    border-radius: 14px;
     width: 0;
     background-color: #007bff;
     background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
@@ -140,6 +135,10 @@ body {
 
 #day-progress {
     background-color: #00b096;
+}
+
+#week-progress {
+    background-color: #2994ff;
 }
 
 #date-time {
@@ -162,7 +161,6 @@ body {
     align-items: center;
     margin-top: 10px;
     flex-direction: row;
-    /* 确保在所有视口中水平排列 */
 }
 
 .date-progress {
@@ -187,6 +185,26 @@ body {
     transition: width 0.5s ease;
 }
 
+.bold-day {
+    font-weight: bold;
+    color: #ff5c02;
+}
+
+.bold-week {
+    font-weight: bold;
+    color: #cd29ff;
+}
+
+.bold-month {
+    font-weight: bold;
+    color: #5fcb11;
+}
+
+.bold-year {
+    font-weight: bold;
+    color: #989903;
+}
+
 /* 动画效果 */
 @keyframes progress-scroll {
     from {
@@ -208,18 +226,46 @@ body {
     }
 }
 
-/* 视口元标签 */
-/* 全屏视口的CSS规则 */
+/* 大屏幕适配 (800px以上) */
 @media only screen and (min-width: 800px) {
+    .countdown-card {
+        max-width: 600px; /* 增大卡片最大宽度 */
+    }
 
+    .holiday-notification,
+    .daily-message {
+        width: auto; /* 自动宽度根据内容适应 */
+        min-width: 60%; /* 设置最小宽度 */
+        max-width: 80%; /* 设置最大宽度 */
+        display: inline-block; /* 保持内联块特性 */
+        padding: 15px 30px; /* 增大内边距 */
+    }
+
+    /* 进度容器添加相对定位 */
+    .countdown-progress {
+        position: relative;
+        padding-right: 50px; /* 为百分比显示留出空间 */
+    }
+
+    /* 百分比显示优化 */
+    .countdown-percentage {
+        position: absolute;
+        right: 10px;
+        top: 52%;
+        transform: translateY(-50%);
+        font-size: 15px;
+        color: #000000;
+        text-shadow: 1px 1px 2px rgba(110, 110, 110, 0.3); /* 阴影效果 */
+    }
+
+    /* 移除嵌套的错误媒体查询 */
     #holiday-notification,
     #daily-message {
         display: inline-block;
-        width: auto;
+        width: 100%;
         margin-bottom: 20px;
         box-sizing: border-box;
         text-align: center;
-        /* 使文本居中 */
     }
 
     .holiday-notification,
@@ -228,12 +274,10 @@ body {
         padding: 20px;
         margin-bottom: 15px;
         box-sizing: border-box;
-        /* 确保内边距和边框计入宽度 */
     }
 
     .holiday-notification+.daily-message {
         margin-top: 0;
-        /* 确保两个块级元素之间没有额外的间距 */
     }
 
     .date-info {
@@ -242,7 +286,6 @@ body {
         align-items: center;
         margin-top: 10px;
         flex-direction: row;
-        /* 确保在全屏时水平排列 */
         width: 100%;
     }
 
@@ -253,34 +296,29 @@ body {
         margin: 0 10px;
     }
 
-    /* 增加当前时间的顶部间距 */
     #current-time {
         margin-top: 20px;
     }
 
-    /* 确保节假日通知背景在全屏视口中铺满 */
     .holiday-notification {
         width: auto;
     }
 }
 
-/* 视口元标签 */
+/* 小屏幕适配 (800px以下) */
 @media only screen and (max-width: 800px) {
     body {
         font-size: 17px;
         padding: 10px;
-        /* 增加内边距 */
     }
 
     #holiday-notification,
     #daily-message {
         display: block;
-        /* 在小屏幕上垂直排列 */
         width: 100%;
         padding: 10px;
         margin-bottom: 15px;
         box-sizing: border-box;
-        /* 确保内边距和边框计入宽度 */
     }
 
     .holiday-notification {
@@ -288,7 +326,6 @@ body {
         padding: 10px;
         margin-bottom: 15px;
         box-sizing: border-box;
-        /* 确保内边距和边框计入宽度 */
     }
 
     .daily-message {
@@ -296,54 +333,43 @@ body {
         padding: 10px;
         margin-bottom: 15px;
         box-sizing: border-box;
-        /* 确保内边距和边框计入宽度 */
     }
 
     .countdown-card {
         width: 100%;
         height: auto;
-        /* 移除固定高度 */
         padding: 10px;
         box-sizing: border-box;
-        /* 确保内边距和边框计入宽度 */
     }
 
     .countdown-item {
-        margin-bottom: 25px;
-        /* 调整间距 */
+        margin-bottom: 20px;
         flex-direction: column;
-        /* 确保项目在小屏幕上垂直排列 */
         align-items: center;
-        /* 保持子元素居中对齐 */
     }
 
     .countdown-label {
         margin-bottom: 8px;
-        /* 调整间距 */
     }
 
     .countdown-progress {
         margin: 5px;
         width: 100%;
         height: 18px;
-        /* 调整进度条高度以适应小屏幕 */
     }
 
     .countdown-progress-bar {
         border-radius: 6px;
-        /* 调整进度条的圆角 */
         height: 100%;
-        /* 确保进度条的宽度随进度变化 */
-        width: calc(100% - 40px);
         /* 减去百分比文本的宽度 */
+        width: calc(100% - 40px);
     }
 
     .card-header {
-        font-size: 20px;
+        font-size: 25px;
         padding: 15px;
         width: 100%;
         box-sizing: border-box;
-        /* 确保内边距和边框计入宽度 */
     }
 
     .card-header .hourglass-icon:before {
@@ -361,7 +387,6 @@ body {
         margin-top: 8px;
         align-items: center;
         flex-direction: row;
-        /* 在小屏幕上水平排列 */
         width: 100%;
     }
 
@@ -369,7 +394,6 @@ body {
         margin-top: 10px;
         width: 100%;
         height: 15px;
-        /* 调整进度条高度以适应小屏幕 */
     }
 
     .date-progress-bar {
@@ -384,11 +408,9 @@ body {
         text-align: center;
     }
 
-    /* 调整百分比显示位置 */
     .countdown-percentage {
-        font-size: 16px;
-        /* 默认字体大小 */
-        color: #333;
+        font-size: 15px;
+        color: #000000;
         position: absolute;
         right: 5px;
         top: 2px;

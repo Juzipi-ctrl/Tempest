@@ -20,35 +20,48 @@
             时光沙漏
         </div>
         <div class="card-body">
-            <div class="countdown-item">
-                <div class="countdown-label">今年剩余时间</div>
-                <div class="countdown-progress">
-                    <div class="countdown-progress-bar" id="year-progress"></div>
-                    <div id="year-percentage" class="countdown-percentage"></div> <!-- 移到进度条里面 -->
-                </div>
-                <div id="year-time"></div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-label">本月剩余时间</div>
-                <div class="countdown-progress">
-                    <div class="countdown-progress-bar" id="month-progress"></div>
-                    <div id="month-percentage" class="countdown-percentage"></div> <!-- 移到进度条里面 -->
-                </div>
-                <div id="month-time"></div>
-            </div>
+            <!-- 显示今天剩余时间 -->
             <div class="countdown-item">
                 <div class="countdown-label">今天剩余时间</div>
                 <div class="countdown-progress">
                     <div class="countdown-progress-bar" id="day-progress"></div>
-                    <div id="day-percentage" class="countdown-percentage"></div> <!-- 移到进度条里面 -->
+                    <div id="day-percentage" class="countdown-percentage"></div>
                 </div>
-                <div id="day-time"></div>
+                <div id="day-time" class="bold-day"></div>
             </div>
+
+            <!-- 显示本周剩余时间 -->
+            <div class="countdown-item">
+                <div class="countdown-label">本周剩余时间</div>
+                <div class="countdown-progress">
+                    <div class="countdown-progress-bar" id="week-progress"></div>
+                    <div id="week-percentage" class="countdown-percentage"></div>
+                </div>
+                <div id="week-time" class="bold-week"></div>
+            </div>
+
+            <!-- 显示本月剩余时间 -->
+            <div class="countdown-item">
+                <div class="countdown-label">本月剩余时间</div>
+                <div class="countdown-progress">
+                    <div class="countdown-progress-bar" id="month-progress"></div>
+                    <div id="month-percentage" class="countdown-percentage"></div>
+                </div>
+                <div id="month-time" class="bold-month"></div>
+            </div>
+
+            <!-- 显示今年剩余时间 -->
+            <div class="countdown-item">
+                <div class="countdown-label">今年剩余时间</div>
+                <div class="countdown-progress">
+                    <div class="countdown-progress-bar" id="year-progress"></div>
+                    <div id="year-percentage" class="countdown-percentage"></div>
+                </div>
+                <div id="year-time" class="bold-year"></div>
+            </div>
+
+
             <div id="date-time"></div>
-            <div class="countdown-progress">
-                <div class="countdown-progress-bar" id="date-progress-bar"></div>
-                <div id="date-percentage" class="countdown-percentage"></div> <!-- 移到进度条里面 -->
-            </div>
             <div class="date-info">
                 <div id="day-of-week"></div>
                 <div id="week-number"></div>
@@ -58,8 +71,6 @@
             <div id="daily-message" class="daily-message" style="display: none;"></div>
         </div>
     </div>
-
-
 
 </body>
 

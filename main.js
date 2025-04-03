@@ -2,7 +2,6 @@ async function getHitokoto() {
     try {
         const response = await fetch("https://v1.hitokoto.cn/");
         const data = await response.json();
-        // 直接访问"data"对象中的"hitokoto"和"from"字段
         return `"${data.hitokoto}" —— ${data.from}`;
     } catch (error) {
         if (error instanceof TypeError) {
@@ -10,7 +9,7 @@ async function getHitokoto() {
         } else {
             console.error("获取一言失败: " + error.message + "，请稍后再试。");
         }
-        return "保持活力，努力工作！"; // 如果API请求失败，显示默认寄语
+        return "保持活力，努力工作！";
     }
 }
 
@@ -66,9 +65,17 @@ function updateCountdown() {
     const weekNumber = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
     $('#week-number').text(`第${weekNumber}周`);
 
-    // 更新日期进度条
-    $('#date-progress-bar').css('width', `${yearProgress}%`);
-    $('#date-percentage').text(`${yearProgress.toFixed(2)}%`); // 移到进度条外面
+    // 更新本周进度条
+    const daysInWeek = 7;
+    const firstDayOfWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay());
+    const weekEnd = new Date(firstDayOfWeek.getFullYear(), firstDayOfWeek.getMonth(), firstDayOfWeek.getDate() + daysInWeek - 1, 23, 59, 59);
+    const weekTotal = weekEnd - firstDayOfWeek;
+    const weekRemaining = weekEnd - now;
+    const weekProgress = ((weekTotal - weekRemaining) / weekTotal) * 100;
+
+    $('#week-progress').css('width', `${weekProgress}%`);
+    $('#week-time').text(`${Math.floor(weekRemaining / (1000 * 60 * 60 * 24))}天`);
+    $('#week-percentage').text(`${weekProgress.toFixed(2)}%`); // 移到进度条外面
 
     // 显示当前时间
     const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
