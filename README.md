@@ -4,7 +4,7 @@
 
 以下是一个针对该页面的介绍页示例，您可以根据实际内容和风格进行调整：
 
-<img width="448" alt="Snipaste_2025-04-04_09-27-31" src="https://github.com/user-attachments/assets/7dd16154-ad7f-4a0a-b78f-9d6e45ade118" />
+<img width="448" alt="Snipaste_2025-04-04_09-27-31" src="https://github.com/user-attachments/assets/eef1ae56-f0cb-416a-971f-6f49e49a6ffd" />
 
 ---
 
