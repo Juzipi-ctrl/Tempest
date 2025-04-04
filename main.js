@@ -1,3 +1,27 @@
+let manualHolidays = {}; // 手动添加的节假日数据对象
+manualHolidays["2025-05-12"] = { name: "护士节" };
+manualHolidays["2025-05-11"] = { name: "母亲节" };
+manualHolidays["2025-06-15"] = { name: "父亲节" };
+manualHolidays["2025-07-01"] = { name: "建党节" };
+manualHolidays["2025-07-07"] = { name: "七七事变纪念日" };
+manualHolidays["2025-07-15"] = { name: "建军节" };
+manualHolidays["2025-07-22"] = { name: "大暑" };
+manualHolidays["2025-08-01"] = { name: "八一建军节" };
+manualHolidays["2025-08-07"] = { name: "立秋" };
+manualHolidays["2025-08-23"] = { name: "处暑" };
+manualHolidays["2025-09-03"] = { name: "抗战胜利日" };
+manualHolidays["2025-09-06"] = { name: "中元节" };
+manualHolidays["2025-09-10"] = { name: "教师节" };
+manualHolidays["2025-10-29"] = { name: "重阳节" };
+manualHolidays["2025-11-07"] = { name: "立冬" };
+manualHolidays["2025-11-27"] = { name: "感恩节" };
+
+
+// 手动添加节假日数据的函数
+function addManualHoliday(date, name) {
+    manualHolidays[date] = { name: name };
+}
+
 async function getHitokoto() {
     try {
         const response = await fetch("https://v1.hitokoto.cn/");
@@ -13,6 +37,25 @@ async function getHitokoto() {
     }
 }
 
+async function getHolidays(year) {
+    try {
+        const response = await fetch(`https://unpkg.com/holiday-calendar@1.1.6/data/CN/${year}.json`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        // 将日期数组转换为对象，键为日期字符串，值为日期信息对象
+        const holidays = {};
+        data.dates.forEach(dateInfo => {
+            holidays[dateInfo.date] = dateInfo;
+        });
+        return holidays;
+    } catch (error) {
+        console.error("获取节假日信息时出错:", error);
+        return {};
+    }
+}
+
 function updateCountdown() {
     const now = new Date();
 
@@ -24,7 +67,7 @@ function updateCountdown() {
 
     $('#year-progress').css('width', `${yearProgress}%`);
     $('#year-time').text(`${Math.floor(yearRemaining / (1000 * 60 * 60 * 24))}天`);
-    $('#year-percentage').text(`${yearProgress.toFixed(2)}%`); // 移到进度条外面
+    $('#year-percentage').text(`${yearProgress.toFixed(2)}%`);
 
     // 本月剩余时间
     const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
@@ -34,7 +77,7 @@ function updateCountdown() {
 
     $('#month-progress').css('width', `${monthProgress}%`);
     $('#month-time').text(`${Math.floor(monthRemaining / (1000 * 60 * 60 * 24))}天`);
-    $('#month-percentage').text(`${monthProgress.toFixed(2)}%`); // 移到进度条外面
+    $('#month-percentage').text(`${monthProgress.toFixed(2)}%`);
 
     // 今天剩余时间
     const dayEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
@@ -48,7 +91,7 @@ function updateCountdown() {
     const secondsRemaining = Math.floor((dayRemaining % (1000 * 60)) / 1000);
 
     $('#day-time').text(`${hoursRemaining}小时${minutesRemaining}分钟${secondsRemaining}秒`);
-    $('#day-percentage').text(`${dayProgress.toFixed(2)}%`); // 移到进度条外面
+    $('#day-percentage').text(`${dayProgress.toFixed(2)}%`);
 
     // 显示当前日期
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -65,9 +108,9 @@ function updateCountdown() {
     const weekNumber = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
     $('#week-number').text(`第${weekNumber}周`);
 
-    // 更新本周进度条
+    // 本周进度条
     const daysInWeek = 7;
-    const firstDayOfWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay());
+    const firstDayOfWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - (now.getDay() - 1));
     const weekEnd = new Date(firstDayOfWeek.getFullYear(), firstDayOfWeek.getMonth(), firstDayOfWeek.getDate() + daysInWeek - 1, 23, 59, 59);
     const weekTotal = weekEnd - firstDayOfWeek;
     const weekRemaining = weekEnd - now;
@@ -75,7 +118,7 @@ function updateCountdown() {
 
     $('#week-progress').css('width', `${weekProgress}%`);
     $('#week-time').text(`${Math.floor(weekRemaining / (1000 * 60 * 60 * 24))}天`);
-    $('#week-percentage').text(`${weekProgress.toFixed(2)}%`); // 移到进度条外面
+    $('#week-percentage').text(`${weekProgress.toFixed(2)}%`);
 
     // 显示当前时间
     const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
@@ -89,16 +132,19 @@ function updateHolidayNotification(now) {
     const day = now.getDate();
     const today = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 
-    $.getJSON(`https://api.jiejiariapi.com/v1/holidays/${year}`, function (holidays) {
-        const holiday = holidays[today];
+    getHolidays(year).then(apiHolidays => {
+        // 合并自动获取的节假日数据和手动添加的节假日数据
+        const holidays = { ...apiHolidays, ...manualHolidays };
 
-        if (holiday) {
-            $('#holiday-notification').text(`今天是：${holiday.name}`).show();
+        // 检查holidays对象中是否存在today这个键
+        if (holidays[today]) {
+            // 假设holidays[today]是一个对象，直接访问其name属性
+            $('#holiday-notification').text(`今天是：${holidays[today].name} -- 好好休息！`).show();
         } else {
             $('#holiday-notification').text(`今天不是节假日`).show();
         }
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-        console.log(`无法获取节假日数据: ${textStatus}, ${errorThrown}`);
+    }).catch(error => {
+        console.log(`无法获取节假日数据: ${error}`);
         $('#holiday-notification').text(`今天不是节假日`).show();
     });
 
@@ -115,4 +161,7 @@ $(document).ready(function () {
     // 每天更新一次节假日通知和寄语
     updateHolidayNotification(new Date());
     setInterval(updateHolidayNotification, 24 * 60 * 60 * 1000);
+
+    // 手动添加一个节假日
+    addManualHoliday('2026-01-01', '新年快乐，元旦快乐！');
 });
