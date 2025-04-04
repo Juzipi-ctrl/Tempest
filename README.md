@@ -4,7 +4,7 @@
 
 以下是一个针对该页面的介绍页示例，您可以根据实际内容和风格进行调整：
 
-![Snipaste_2025-04-04_09-27-31](C:\Users\21353\Pictures\截屏\Snipaste_2025-04-04_09-27-31.png)
+<img width="448" alt="Snipaste_2025-04-04_09-27-31" src="https://github.com/user-attachments/assets/7dd16154-ad7f-4a0a-b78f-9d6e45ade118" />
 
 ---
 
