@@ -104,8 +104,15 @@ function updateCountdown() {
 
     // 显示周数
     const firstDayOfYear = new Date(now.getFullYear(), 0, 1);
-    const pastDaysOfYear = (now - firstDayOfYear) / (24 * 60 * 60 * 1000);
-    const weekNumber = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+    // 找到1月1日所在的星期几
+    const dayOfWeek = firstDayOfYear.getDay();
+    // 计算第一个星期一的日期
+    const firstMonday = new Date(now.getFullYear(), 0, 1 + (dayOfWeek === 0 ? 1 : 8 - dayOfWeek));
+    // 计算从第一个星期一到当前日期的天数
+    const pastDaysOfYear = (now - firstMonday) / (24 * 60 * 60 * 1000);
+    // 计算周数
+    const weekNumber = Math.ceil(pastDaysOfYear / 7) + 1; // 加1是因为算上第一周
+
     $('#week-number').text(`第${weekNumber}周`);
 
     // 本周进度条
@@ -165,3 +172,4 @@ $(document).ready(function () {
     // 手动添加一个节假日
     addManualHoliday('2026-01-01', '新年快乐，元旦快乐！');
 });
+
