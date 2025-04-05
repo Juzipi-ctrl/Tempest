@@ -240,7 +240,7 @@ body {
     .daily-message {
         width: auto; /* 自动宽度根据内容适应 */
         min-width: 60%; /* 设置最小宽度 */
-        max-width: 80%; /* 设置最大宽度 */
+        max-width: 100%; /* 设置最大宽度 */
         display: inline-block; /* 保持内联块特性 */
         padding: 15px 30px; /* 增大内边距 */
     }
