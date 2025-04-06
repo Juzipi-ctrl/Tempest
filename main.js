@@ -1,27 +1,11 @@
 let manualHolidays = {}; // 手动添加的节假日数据对象
-manualHolidays["2025-05-12"] = { name: "护士节" };
-manualHolidays["2025-05-11"] = { name: "母亲节" };
-manualHolidays["2025-06-15"] = { name: "父亲节" };
-manualHolidays["2025-07-01"] = { name: "建党节" };
-manualHolidays["2025-07-07"] = { name: "七七事变纪念日" };
-manualHolidays["2025-07-15"] = { name: "建军节" };
-manualHolidays["2025-07-22"] = { name: "大暑" };
-manualHolidays["2025-08-01"] = { name: "八一建军节" };
-manualHolidays["2025-08-07"] = { name: "立秋" };
-manualHolidays["2025-08-23"] = { name: "处暑" };
-manualHolidays["2025-09-03"] = { name: "抗战胜利日" };
-manualHolidays["2025-09-06"] = { name: "中元节" };
-manualHolidays["2025-09-10"] = { name: "教师节" };
-manualHolidays["2025-10-29"] = { name: "重阳节" };
-manualHolidays["2025-11-07"] = { name: "立冬" };
-manualHolidays["2025-11-27"] = { name: "感恩节" };
-
 
 // 手动添加节假日数据的函数
 function addManualHoliday(date, name) {
     manualHolidays[date] = { name: name };
 }
 
+// 异步获取一言的函数
 async function getHitokoto() {
     try {
         const response = await fetch("https://v1.hitokoto.cn/");
@@ -37,6 +21,7 @@ async function getHitokoto() {
     }
 }
 
+// 异步获取指定年份节假日信息的函数
 async function getHolidays(year) {
     try {
         const response = await fetch(`https://unpkg.com/holiday-calendar@1.1.6/data/CN/${year}.json`);
@@ -56,6 +41,7 @@ async function getHolidays(year) {
     }
 }
 
+// 更新倒计时的函数
 function updateCountdown() {
     const now = new Date();
 
@@ -104,28 +90,45 @@ function updateCountdown() {
 
     // 显示周数
     const firstDayOfYear = new Date(now.getFullYear(), 0, 1);
-    // 找到1月1日所在的星期几
     const dayOfWeek = firstDayOfYear.getDay();
-    // 计算第一个星期一的日期
     const firstMonday = new Date(now.getFullYear(), 0, 1 + (dayOfWeek === 0 ? 1 : 8 - dayOfWeek));
-    // 计算从第一个星期一到当前日期的天数
     const pastDaysOfYear = (now - firstMonday) / (24 * 60 * 60 * 1000);
-    // 计算周数
-    const weekNumber = Math.ceil(pastDaysOfYear / 7) + 1; // 加1是因为算上第一周
+    const weekNumber = Math.ceil(pastDaysOfYear / 7) + 1;
 
     $('#week-number').text(`第${weekNumber}周`);
 
-    // 本周进度条
-    const daysInWeek = 7;
-    const firstDayOfWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - (now.getDay() - 1));
-    const weekEnd = new Date(firstDayOfWeek.getFullYear(), firstDayOfWeek.getMonth(), firstDayOfWeek.getDate() + daysInWeek - 1, 23, 59, 59);
-    const weekTotal = weekEnd - firstDayOfWeek;
-    const weekRemaining = weekEnd - now;
-    const weekProgress = ((weekTotal - weekRemaining) / weekTotal) * 100;
+    // 更新本周进度条（修正版）
+    const now2 = new Date();
 
+    /*-- 修正1：确保周起始时间精确到周一0点 --*/
+    // 创建本周一的0点时间对象（原逻辑保留但增加时间归零）
+    const firstDayOfWeek = new Date(now2);
+    firstDayOfWeek.setDate(now2.getDate() - (now2.getDay() || 7) + 1);
+    firstDayOfWeek.setHours(0, 0, 0, 0); // 新增：强制归零时间
+
+    /*-- 修正2：周结束时间改为周日23:59:59 --*/
+    const weekEnd = new Date(firstDayOfWeek);
+    weekEnd.setDate(firstDayOfWeek.getDate() + 6); // 原daysInWeek变量可保留但实际改为+6天
+    weekEnd.setHours(23, 59, 59, 999); // 新增：精确到本周日23:59:59
+
+    /*-- 修正3：精确计算时间差 --*/
+    const weekTotal = weekEnd - firstDayOfWeek; // 总时长固定为604800000ms(7天)
+    const weekPassed = now - firstDayOfWeek;
+    const weekProgress = Math.min(
+        (weekPassed / weekTotal) * 100,
+        100 // 防止超过100%
+    ).toFixed(2); // 保留两位小数
+
+    /*-- 修正4：自然日剩余天数计算 --*/
+    const remainingMilliseconds = weekEnd - now2;
+    let remainingDays = Math.ceil(remainingMilliseconds / (1000 * 3600 * 24));
+    // 边界处理（原条件判断改为数学计算）
+    if (remainingDays < 0) remainingDays = 0;
+
+    /*-- 更新DOM --*/
     $('#week-progress').css('width', `${weekProgress}%`);
-    $('#week-time').text(`${Math.floor(weekRemaining / (1000 * 60 * 60 * 24))}天`);
-    $('#week-percentage').text(`${weekProgress.toFixed(2)}%`);
+    $('#week-time').text(`${remainingDays}天`);
+    $('#week-percentage').text(`${weekProgress}%`);
 
     // 显示当前时间
     const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
@@ -133,6 +136,7 @@ function updateCountdown() {
     $('#current-time').text(`当前时间: ${formattedTime}`);
 }
 
+// 更新节假日通知的函数
 function updateHolidayNotification(now) {
     const year = now.getFullYear();
     const month = now.getMonth() + 1;
@@ -140,12 +144,9 @@ function updateHolidayNotification(now) {
     const today = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 
     getHolidays(year).then(apiHolidays => {
-        // 合并自动获取的节假日数据和手动添加的节假日数据
         const holidays = { ...apiHolidays, ...manualHolidays };
 
-        // 检查holidays对象中是否存在today这个键
         if (holidays[today]) {
-            // 假设holidays[today]是一个对象，直接访问其name属性
             $('#holiday-notification').text(`今天是：${holidays[today].name} -- 好好休息！`).show();
         } else {
             $('#holiday-notification').text(`今天不是节假日`).show();
@@ -155,21 +156,16 @@ function updateHolidayNotification(now) {
         $('#holiday-notification').text(`今天不是节假日`).show();
     });
 
-    // 请求API获取每日寄语
     getHitokoto().then(poemContent => {
         $('#daily-message').text(poemContent).show();
     });
 }
 
-// 初始化并每秒更新一次
 $(document).ready(function () {
     updateCountdown();
     setInterval(updateCountdown, 1000);
-    // 每天更新一次节假日通知和寄语
     updateHolidayNotification(new Date());
     setInterval(updateHolidayNotification, 24 * 60 * 60 * 1000);
 
-    // 手动添加一个节假日
     addManualHoliday('2026-01-01', '新年快乐，元旦快乐！');
 });
-
