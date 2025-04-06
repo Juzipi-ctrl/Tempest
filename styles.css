@@ -166,7 +166,7 @@ body {
 
 /* 周进度条样式 */
 #week-progress {
-    background-color: #254cd9;
+    background-color: #2994ff;
     animation: progress-scroll 1s linear infinite, loadProgress 0.5s ease-in-out forwards;
 }
 
