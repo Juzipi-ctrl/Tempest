@@ -10,22 +10,23 @@ body {
     font-size: 20px;
 }
 
+/* 节假日通知样式 */
 .holiday-notification {
     background-color: #ffd90082;
     border-radius: 10px;
-    padding: 20px 20px;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    padding: 20px;
+    margin: 20px 0;
     font-size: 20px;
     color: #333;
     text-align: center;
-    width: 10%;
+    min-width: 10%;
+    max-width: 100%;
     box-sizing: border-box;
     animation: fadeIn 2s ease-in-out;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        /* 添加阴影以增加立体感 */
 }
 
+/* 每日信息样式 */
 .daily-message {
     background-color: #E3F2FD;
     border-radius: 10px;
@@ -34,13 +35,14 @@ body {
     font-size: 19px;
     color: #333;
     text-align: center;
-    width: 10%;
+    min-width: 10%;
+    max-width: 100%;
     box-sizing: border-box;
     animation: fadeIn 2s ease-in-out;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        /* 添加阴影以增加立体感 */
 }
 
+/* 倒计时卡片样式 */
 .countdown-card {
     background-color: #fff;
     border-radius: 10px;
@@ -58,9 +60,10 @@ body {
     animation: fadeIn 2s ease-in-out;
 }
 
+/* 卡片头部样式 */
 .card-header {
     background-color: #f8f9fa;
-    padding: 20px;
+    padding: 5px 10px;
     border-bottom: 1px solid #eee;
     display: flex;
     align-items: center;
@@ -71,6 +74,7 @@ body {
     box-sizing: border-box;
 }
 
+/* 卡片头部沙漏图标样式 */
 .card-header .hourglass-icon:before {
     content: '\23F3';
     font-size: 36px;
@@ -78,6 +82,7 @@ body {
     font-family: 'arial';
 }
 
+/* 卡片主体样式 */
 .card-body {
     padding: 20px;
     width: 100%;
@@ -89,6 +94,7 @@ body {
     box-sizing: border-box;
 }
 
+/* 倒计时项目样式 */
 .countdown-item {
     display: flex;
     flex-direction: column;
@@ -96,9 +102,10 @@ body {
     align-items: center;
     width: 100%;
     box-sizing: border-box;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
 }
 
+/* 倒计时标签样式 */
 .countdown-label {
     font-size: 20px;
     color: #333;
@@ -107,10 +114,11 @@ body {
     margin-bottom: 10px;
 }
 
+/* 倒计时进度条样式 */
 .countdown-progress {
     background-color: #f5f5f5;
     border-radius: 5px;
-    height: 18px;
+    height: 15px;
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -118,33 +126,43 @@ body {
     box-sizing: border-box;
 }
 
+/* 倒计时进度条内部进度条样式 */
 .countdown-progress-bar {
     height: 100%;
-    border-radius: 14px;
-    width: 0;
-    background-color: #007bff;
+    border-radius: 10px;
+    width: 0; /* 初始宽度为0 */
+    background-color: #00b096;
     background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
     background-size: 20px 20px;
-    animation: progress-scroll 1s linear infinite;
+    animation: progress-scroll 1s linear infinite, loadProgress 0.5s ease-in-out forwards;
     transition: width 0.5s ease;
 }
 
+/* 年进度条样式 */
 #year-progress {
     background-color: #ff7e5f;
+    animation: progress-scroll 1s linear infinite, loadProgress 0.5s ease-in-out forwards;
 }
 
+/* 月进度条样式 */
 #month-progress {
     background-color: #6a11cb;
+    animation: progress-scroll 1s linear infinite, loadProgress 0.5s ease-in-out forwards;
 }
 
+/* 日进度条样式 */
 #day-progress {
     background-color: #00b096;
+    animation: progress-scroll 1s linear infinite, loadProgress 0.5s ease-in-out forwards;
 }
 
+/* 周进度条样式 */
 #week-progress {
     background-color: #2994ff;
+    animation: progress-scroll 1s linear infinite, loadProgress 0.5s ease-in-out forwards;
 }
 
+/* 日期时间样式 */
 #date-time {
     font-size: 20px;
     color: #333;
@@ -152,6 +170,7 @@ body {
     text-align: center;
 }
 
+/* 星期与周数样式 */
 #day-of-week,
 #week-number {
     font-size: 20px;
@@ -159,6 +178,7 @@ body {
     margin: 0 10px;
 }
 
+/* 日期信息容器样式 */
 .date-info {
     display: flex;
     justify-content: center;
@@ -167,6 +187,7 @@ body {
     flex-direction: row;
 }
 
+/* 日期进度条样式 */
 .date-progress {
     background-color: #f5f5f5;
     border-radius: 5px;
@@ -178,10 +199,11 @@ body {
     box-sizing: border-box;
 }
 
+/* 日期进度条内部进度条样式 */
 .date-progress-bar {
     height: 100%;
     border-radius: 10px;
-    width: 0;
+    width: 0; /* 初始宽度为0 */
     background-color: #00b096;
     background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
     background-size: 20px 20px;
@@ -189,21 +211,25 @@ body {
     transition: width 0.5s ease;
 }
 
+/* 加粗显示的天样式 */
 .bold-day {
     font-weight: bold;
     color: #ff5c02;
 }
 
+/* 加粗显示的周样式 */
 .bold-week {
     font-weight: bold;
     color: #cd29ff;
 }
 
+/* 加粗显示的月样式 */
 .bold-month {
     font-weight: bold;
     color: #5fcb11;
 }
 
+/* 加粗显示的年样式 */
 .bold-year {
     font-weight: bold;
     color: #b4ae0e;
@@ -214,17 +240,16 @@ body {
     from {
         background-position: 0 0;
     }
-
     to {
         background-position: -20px 0;
     }
 }
 
+/* 淡入动画效果 */
 @keyframes fadeIn {
     from {
         opacity: 0;
     }
-
     to {
         opacity: 1;
     }
@@ -233,11 +258,18 @@ body {
 /* 大屏幕适配 (800px以上) */
 @media only screen and (min-width: 800px) {
     .countdown-card {
-        max-width: 600px; /* 增大卡片最大宽度 */
+        max-width: 600px;
     }
 
     .holiday-notification,
     .daily-message {
+
+        width: auto;
+        min-width: 100%;
+        max-width: 100%;
+        display: inline-block;
+        padding: 10px 20px;
+
         width: auto; /* 自动宽度根据内容适应 */
         min-width: 60%; /* 设置最小宽度 */
         max-width: 100%; /* 设置最大宽度 */
@@ -245,67 +277,28 @@ body {
         padding: 15px 30px; /* 增大内边距 */
     }
 
-    /* 进度容器添加相对定位 */
     .countdown-progress {
         position: relative;
-        padding-right: 50px; /* 为百分比显示留出空间 */
+        padding-right: 50px;
     }
 
-    /* 百分比显示优化 */
     .countdown-percentage {
         position: absolute;
         right: 10px;
-        top: 52%;
+        top: 50%;
         transform: translateY(-50%);
         font-size: 15px;
         color: #000000;
-        text-shadow: 1px 1px 2px rgba(110, 110, 110, 0.3); /* 阴影效果 */
-    }
-
-    /* 移除嵌套的错误媒体查询 */
-    #holiday-notification,
-    #daily-message {
-        display: inline-block;
-        width: 100%;
-        margin-bottom: 10px;
-        box-sizing: border-box;
-        text-align: center;
-    }
-
-    .holiday-notification,
-    .daily-message {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        box-sizing: border-box;
-    }
-
-    .holiday-notification+.daily-message {
-        margin-top: 0;
+        text-shadow: 1px 1px 2px rgba(110, 110, 110, 0.3);
     }
 
     .date-info {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10px;
-        flex-direction: row;
         width: 100%;
     }
 
-    #day-of-week,
-    #week-number {
-        font-size: 20px;
-        color: #3052ce;
-        margin: 0 10px;
-    }
-
-    #current-time {
-        margin-top: 20px;
-    }
-
-    .holiday-notification {
-        width: auto;
+    .countdown-progress-bar,
+    .date-progress-bar {
+        width: calc(100% - 40px);
     }
 }
 
@@ -316,40 +309,22 @@ body {
         padding: 10px;
     }
 
-    #holiday-notification,
-    #daily-message {
+    .holiday-notification,
+    .daily-message {
         display: block;
         width: 100%;
         padding: 10px;
         margin-bottom: 15px;
-        box-sizing: border-box;
-    }
-
-    .holiday-notification {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        box-sizing: border-box;
-    }
-
-    .daily-message {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        box-sizing: border-box;
     }
 
     .countdown-card {
         width: 100%;
         height: auto;
         padding: 10px;
-        box-sizing: border-box;
     }
 
     .countdown-item {
         margin-bottom: 15px;
-        flex-direction: column;
-        align-items: center;
     }
 
     .countdown-label {
@@ -358,22 +333,17 @@ body {
 
     .countdown-progress {
         margin: 5px;
-        width: 100%;
-        height: 18px;
+        padding-right: 30px; /* 为百分比显示留出空间 */
     }
 
-    .countdown-progress-bar {
-        border-radius: 6px;
-        height: 100%;
-        /* 减去百分比文本的宽度 */
-        width: calc(100% - 40px);
+    .countdown-progress-bar,
+    .date-progress-bar {
+        width: calc(100% - 30px);
     }
 
     .card-header {
         font-size: 25px;
-        padding: 5px;
-        width: 100%;
-        box-sizing: border-box;
+        padding: 10px;
     }
 
     .card-header .hourglass-icon:before {
@@ -381,16 +351,12 @@ body {
         margin-right: 15px;
     }
 
-    #date-time,
-    #day-of-week,
-    #week-number {
-        font-size: 20px;
+    .holiday-notification+.daily-message {
+        margin-top: 0;
     }
 
     .date-info {
         margin-top: 8px;
-        align-items: center;
-        flex-direction: row;
         width: 100%;
     }
 
@@ -400,28 +366,17 @@ body {
         height: 15px;
     }
 
-    .date-progress-bar {
-        border-radius: 6px;
-        height: 100%;
-    }
-
-    #current-time {
-        font-size: 20px;
-        color: #333;
-        margin-top: 20px;
-        text-align: center;
-    }
-
-    .countdown-percentage {
-        font-size: 15px;
-        color: #000000;
+    .countdown-percentage,
+    .date-percentage {
         position: absolute;
         right: 5px;
-        top: 2px;
-        width: auto;
+        top: 0;
+        font-size: 15px;
+        color: #000000;
         text-align: right;
         z-index: 1;
     }
+
 
     /* 针对大屏幕的调整，确保进度条有足够的内边距以显示百分比 */
     @media only screen and (min-width: 800px) {
@@ -445,4 +400,5 @@ body {
         }
 
     }
+
 }
