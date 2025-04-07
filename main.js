@@ -1,4 +1,20 @@
 let manualHolidays = {}; // 手动添加的节假日数据对象
+manualHolidays["2025-05-12"] = { name: "护士节" };
+manualHolidays["2025-05-11"] = { name: "母亲节" };
+manualHolidays["2025-06-15"] = { name: "父亲节" };
+manualHolidays["2025-07-01"] = { name: "建党节" };
+manualHolidays["2025-07-07"] = { name: "七七事变纪念日" };
+manualHolidays["2025-07-15"] = { name: "建军节" };
+manualHolidays["2025-07-22"] = { name: "大暑" };
+manualHolidays["2025-08-01"] = { name: "八一建军节" };
+manualHolidays["2025-08-07"] = { name: "立秋" };
+manualHolidays["2025-08-23"] = { name: "处暑" };
+manualHolidays["2025-09-03"] = { name: "抗战胜利日" };
+manualHolidays["2025-09-06"] = { name: "中元节" };
+manualHolidays["2025-09-10"] = { name: "教师节" };
+manualHolidays["2025-10-29"] = { name: "重阳节" };
+manualHolidays["2025-11-07"] = { name: "立冬" };
+manualHolidays["2025-11-27"] = { name: "感恩节" };
 
 // 手动添加节假日数据的函数
 function addManualHoliday(date, name) {
