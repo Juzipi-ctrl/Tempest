@@ -163,9 +163,9 @@ function updateHolidayNotification(now) {
         const holidays = { ...apiHolidays, ...manualHolidays };
 
         if (holidays[today]) {
-            $('#holiday-notification').text(`今天是：${holidays[today].name} -- 好好休息！`).show();
+            $('#holiday-notification').text(`✅【假日模式】：${holidays[today].name}  🌞【休息日】`).show();
         } else {
-            $('#holiday-notification').text(`今天不是节假日`).show();
+            $('#holiday-notification').text(`⏰【工作日】📅`).show();
         }
     }).catch(error => {
         console.log(`无法获取节假日数据: ${error}`);
